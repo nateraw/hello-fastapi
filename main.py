@@ -9,6 +9,10 @@ app = FastAPI()
 def read_root():
     return {"Hello": "World"}
 
+@app.get("/env/")
+def read_env():
+    stage = os.environ.get('STAGE', 'NO STAGE FOUND')
+    return {"stage": stage}
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Optional[str] = None):
